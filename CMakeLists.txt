@@ -59,70 +59,70 @@ ${Pangolin_INCLUDE_DIRS}
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 add_library(${PROJECT_NAME} SHARED
-src/System.cc
-src/Tracking.cc
-src/LocalMapping.cc
-src/LoopClosing.cc
-src/ORBextractor.cc
-src/ORBmatcher.cc
-src/FrameDrawer.cc
-src/Converter.cc
-src/MapPoint.cc
-src/KeyFrame.cc
-src/Atlas.cc
-src/Map.cc
-src/MapDrawer.cc
-src/Optimizer.cc
-src/Frame.cc
-src/KeyFrameDatabase.cc
-src/Sim3Solver.cc
-src/Initializer.cc
-src/Viewer.cc
-src/ImuTypes.cc
-src/G2oTypes.cc
-src/CameraModels/Pinhole.cpp
-src/CameraModels/KannalaBrandt8.cpp
-src/OptimizableTypes.cpp
-src/MLPnPsolver.cpp
-src/TwoViewReconstruction.cc
-include/System.h
-include/Tracking.h
-include/LocalMapping.h
-include/LoopClosing.h
-include/ORBextractor.h
-include/ORBmatcher.h
-include/FrameDrawer.h
-include/Converter.h
-include/MapPoint.h
-include/KeyFrame.h
-include/Atlas.h
-include/Map.h
-include/MapDrawer.h
-include/Optimizer.h
-include/Frame.h
-include/KeyFrameDatabase.h
-include/Sim3Solver.h
-include/Initializer.h
-include/Viewer.h
-include/ImuTypes.h
-include/G2oTypes.h
-include/CameraModels/GeometricCamera.h
-include/CameraModels/Pinhole.h
-include/CameraModels/KannalaBrandt8.h
-include/OptimizableTypes.h
-include/MLPnPsolver.h
-include/TwoViewReconstruction.h
-include/Config.h
+orb_slam3/src/System.cc
+orb_slam3/src/Tracking.cc
+orb_slam3/src/LocalMapping.cc
+orb_slam3/src/LoopClosing.cc
+orb_slam3/src/ORBextractor.cc
+orb_slam3/src/ORBmatcher.cc
+orb_slam3/src/FrameDrawer.cc
+orb_slam3/src/Converter.cc
+orb_slam3/src/MapPoint.cc
+orb_slam3/src/KeyFrame.cc
+orb_slam3/src/Atlas.cc
+orb_slam3/src/Map.cc
+orb_slam3/src/MapDrawer.cc
+orb_slam3/src/Optimizer.cc
+orb_slam3/src/Frame.cc
+orb_slam3/src/KeyFrameDatabase.cc
+orb_slam3/src/Sim3Solver.cc
+orb_slam3/src/Initializer.cc
+orb_slam3/src/Viewer.cc
+orb_slam3/src/ImuTypes.cc
+orb_slam3/src/G2oTypes.cc
+orb_slam3/src/CameraModels/Pinhole.cpp
+orb_slam3/src/CameraModels/KannalaBrandt8.cpp
+orb_slam3/src/OptimizableTypes.cpp
+orb_slam3/src/MLPnPsolver.cpp
+orb_slam3/src/TwoViewReconstruction.cc
+orb_slam3/include/System.h
+orb_slam3/include/Tracking.h
+orb_slam3/include/LocalMapping.h
+orb_slam3/include/LoopClosing.h
+orb_slam3/include/ORBextractor.h
+orb_slam3/include/ORBmatcher.h
+orb_slam3/include/FrameDrawer.h
+orb_slam3/include/Converter.h
+orb_slam3/include/MapPoint.h
+orb_slam3/include/KeyFrame.h
+orb_slam3/include/Atlas.h
+orb_slam3/include/Map.h
+orb_slam3/include/MapDrawer.h
+orb_slam3/include/Optimizer.h
+orb_slam3/include/Frame.h
+orb_slam3/include/KeyFrameDatabase.h
+orb_slam3/include/Sim3Solver.h
+orb_slam3/include/Initializer.h
+orb_slam3/include/Viewer.h
+orb_slam3/include/ImuTypes.h
+orb_slam3/include/G2oTypes.h
+orb_slam3/include/CameraModels/GeometricCamera.h
+orb_slam3/include/CameraModels/Pinhole.h
+orb_slam3/include/CameraModels/KannalaBrandt8.h
+orb_slam3/include/OptimizableTypes.h
+orb_slam3/include/MLPnPsolver.h
+orb_slam3/include/TwoViewReconstruction.h
+orb_slam3/include/Config.h
 )
 
-add_subdirectory(Thirdparty/g2o)
+add_subdirectory(orb_slam3/Thirdparty/g2o)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
 ${Pangolin_LIBRARIES}
-${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
-${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+${PROJECT_SOURCE_DIR}/orb_slam3/Thirdparty/DBoW2/lib/libDBoW2.so
+${PROJECT_SOURCE_DIR}/orb_slam3/Thirdparty/g2o/lib/libg2o.so
 -lboost_serialization
 -lcrypto
 )
@@ -130,31 +130,18 @@ ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 
 ### Build examples
 
-# RGB-D examples
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/RGB-D)
-
-add_executable(rgbd_tum
-Examples/RGB-D/rgbd_tum.cc)
-target_link_libraries(rgbd_tum ${PROJECT_NAME})
-
-
-# Stereo examples
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo)
-
-add_executable(stereo_kitti
-Examples/Stereo/stereo_kitti.cc)
-target_link_libraries(stereo_kitti ${PROJECT_NAME})
-
-add_executable(stereo_euroc
-Examples/Stereo/stereo_euroc.cc)
-target_link_libraries(stereo_euroc ${PROJECT_NAME})
-
-add_executable(stereo_tum_vi
-Examples/Stereo/stereo_tum_vi.cc)
-target_link_libraries(stereo_tum_vi ${PROJECT_NAME})
 
 # Monocular examples
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/orb_slam3/Examples/Monocular)
+
+add_executable(ros_mono
+  src/ros_mono.cc
+  src/common.cc
+)
+target_link_libraries(ros_mono
+  ${PROJECT_NAME}
+)
+
 
 add_executable(mono_tum
 Examples/Monocular/mono_tum.cc)
@@ -171,26 +158,3 @@ target_link_libraries(mono_euroc ${PROJECT_NAME})
 add_executable(mono_tum_vi
 Examples/Monocular/mono_tum_vi.cc)
 target_link_libraries(mono_tum_vi ${PROJECT_NAME})
-
-# Monocular-Inertial examples
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular-Inertial)
-
-add_executable(mono_inertial_euroc
-Examples/Monocular-Inertial/mono_inertial_euroc.cc)
-target_link_libraries(mono_inertial_euroc ${PROJECT_NAME})
-
-add_executable(mono_inertial_tum_vi
-Examples/Monocular-Inertial/mono_inertial_tum_vi.cc)
-target_link_libraries(mono_inertial_tum_vi ${PROJECT_NAME})
-
-# Stereo-Inertial examples
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo-Inertial)
-
-add_executable(stereo_inertial_euroc
-Examples/Stereo-Inertial/stereo_inertial_euroc.cc)
-target_link_libraries(stereo_inertial_euroc ${PROJECT_NAME})
-
-add_executable(stereo_inertial_tum_vi
-Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc)
-target_link_libraries(stereo_inertial_tum_vi ${PROJECT_NAME})
-
